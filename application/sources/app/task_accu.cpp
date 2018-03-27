@@ -205,15 +205,13 @@ void task_accu(ak_msg_t* msg) {
 		break;
 	case AC_ACCU_CT_CHECK:
 		/* TO DO CODE HERE */
-		xprintf("\r\n");
-//		APP_DBG("****************CT-READ******************\r\n");
-//		for (uint8_t i = 0; i < NUM_OF_CT_SENSORS; i++){
-//			APP_PRINT("I[%d]: %d.%d%d\t",i,(uint32_t)accu_data_frame.I_Bat[i],(uint32_t)(accu_data_frame.I_Bat[i]*10)%10,(uint32_t)(accu_data_frame.I_Bat[i]*100)%10);
-//		}
-		accu_data_frame.I_Bat[0] = (float)(((adc_ct_io_read(ADC_Channel_9) - adc_ct_io_read(ADC_Channel_8))*3300)/
-					(ADC_COUNTS_CT_SENSOR * ADC_CT_RATIO_mV_PER_A * ADC_CT_AMPLIFY));
-		APP_DBG("Itest: %d\t",(int32_t)(accu_data_frame.I_Bat[0]*1000));
-
+		if(debug_accu_on){
+			APP_PRINT("****************CT-READ******************\r\n");
+			for (uint8_t i = 0; i < NUM_OF_CT_SENSORS; i++){
+				APP_PRINT("I[%d]: %d mA\t",i,(int32_t)(accu_data_frame.I_Bat[i]*1000));
+			}
+			APP_PRINT("\n");
+		}
 		break;
 	default:
 		break;

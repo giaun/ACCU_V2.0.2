@@ -156,7 +156,7 @@ int main_app() {
 void app_start_timer() {
 	/* start timer to toggle life led */
 	timer_set(AC_TASK_LIFE_ID, AC_LIFE_SYSTEM_CHECK, AC_LIFE_TASK_TIMER_LED_LIFE_INTERVAL, TIMER_PERIODIC);
-//	timer_set(AC_TASK_ACCU_ID, AC_ACCU_CT_CHECK, AC_ACCU_TASK_TIMER_AMPER_CHECK, TIMER_PERIODIC);
+	timer_set(AC_TASK_ACCU_ID, AC_ACCU_CT_CHECK, AC_ACCU_TASK_TIMER_AMPER_CHECK, TIMER_PERIODIC);
 }
 
 /* init state machine for tasks

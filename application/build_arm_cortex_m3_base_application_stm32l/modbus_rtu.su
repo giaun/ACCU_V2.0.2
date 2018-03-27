@@ -1,0 +1,31 @@
+modbus_rtu.cpp:17:1:Modbus::Modbus()	0	static
+modbus_rtu.cpp:37:6:void Modbus::setID(uint8_t)	0	static
+modbus_rtu.cpp:52:9:uint8_t Modbus::getID()	0	static
+modbus_rtu.cpp:68:6:void Modbus::setTimeOut(uint16_t)	0	static
+modbus_rtu.cpp:81:9:boolean Modbus::getTimeOutState()	8	static
+modbus_rtu.cpp:94:10:uint16_t Modbus::getInCnt()	0	static
+modbus_rtu.cpp:107:10:uint16_t Modbus::getOutCnt()	0	static
+modbus_rtu.cpp:120:10:uint16_t Modbus::getErrCnt()	0	static
+modbus_rtu.cpp:131:9:uint8_t Modbus::getState()	0	static
+modbus_rtu.cpp:145:9:uint8_t Modbus::getLastError()	0	static
+modbus_rtu.cpp:243:6:void Modbus::getData_serial(uint8_t)	0	static
+modbus_rtu.cpp:421:6:void Modbus::begin(uint32_t)	8	static
+modbus_rtu.cpp:21:6:void Modbus::init(uint8_t, uint8_t, long int)	8	static
+modbus_rtu.cpp:442:6:void Modbus::begin()	0	static
+modbus_rtu.cpp:455:8:int8_t Modbus::getRxBuffer()	0	static
+modbus_rtu.cpp:478:6:void Modbus::sendTxBuffer()	24	static
+modbus_rtu.cpp:162:8:int8_t Modbus::query(modbus_t)	32	static
+modbus_rtu.cpp:517:10:uint16_t Modbus::calcCRC(uint8_t)	8	static
+modbus_rtu.cpp:549:9:uint8_t Modbus::validateRequest()	24	static
+modbus_rtu.cpp:617:9:uint8_t Modbus::validateAnswer()	16	static
+modbus_rtu.cpp:661:6:void Modbus::buildException(uint8_t)	4	static
+modbus_rtu.cpp:678:6:void Modbus::get_FC1()	0	static
+modbus_rtu.cpp:691:6:void Modbus::get_FC3()	24	static
+modbus_rtu.cpp:271:8:int8_t Modbus::poll()	16	static
+modbus_rtu.cpp:713:8:int8_t Modbus::process_FC1(uint16_t*, uint8_t)	32	static
+modbus_rtu.cpp:767:8:int8_t Modbus::process_FC3(uint16_t*, uint8_t)	24	static
+modbus_rtu.cpp:798:8:int8_t Modbus::process_FC5(uint16_t*, uint8_t)	16	static
+modbus_rtu.cpp:830:8:int8_t Modbus::process_FC6(uint16_t*, uint8_t)	16	static
+modbus_rtu.cpp:856:8:int8_t Modbus::process_FC15(uint16_t*, uint8_t)	24	static
+modbus_rtu.cpp:913:8:int8_t Modbus::process_FC16(uint16_t*, uint8_t)	24	static
+modbus_rtu.cpp:337:8:int8_t Modbus::poll(uint16_t*, uint8_t)	24	static

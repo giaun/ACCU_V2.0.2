@@ -490,11 +490,11 @@ void Modbus::sendTxBuffer() {
 		io_uart_rs485_transfer(au8Buffer[i]);
 	}
 
-	if (debug_accu_on){
-		for (uint8_t i = 0; i < u8BufferSize; i++) {
-			APP_PRINT("send_data[%d]: %d\n", i, au8Buffer[i]);
-		}
-	}
+//	if (debug_accu_on){
+//		for (uint8_t i = 0; i < u8BufferSize; i++) {
+//			APP_PRINT("send_data[%d]: %d\n", i, au8Buffer[i]);
+//		}
+//	}
 
 	u8BufferSize = 0;
 	bBuffOverflow = false;

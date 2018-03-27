@@ -32,7 +32,6 @@ uint16_t send_data[NUM_OF_CT_SENSORS*2 + LTC6803_TOTAL_IC*NUM_OF_ACCU_PER_LTC680
 int8_t rs485_stt[10];// = -2;
 
 void sys_irq_RS485() {
-	if(debug_accu_on) APP_PRINT("\n[RS485] getdata\n");
 	slave_accu.getData_serial(io_uart_RS485_get_byte());
 
 	if (finish_rev_data == 1){
@@ -56,7 +55,7 @@ void task_rs485(ak_msg_t* msg) {
 	case AC_RS485_ACCU_UPDATE: {
 		if (finish_rev_data == 0){
 			if (abs(millis()-finish_time) > receive_timeout){
-//				APP_PRINT("\n[RS485] Polling data....\n");
+				if(debug_accu_on) APP_PRINT("\n[RS485] Polling data....\n");
 
 				/* set data to send_data[] buffer*/
 				for (uint8_t i = 0; i < (sizeof(send_data)/sizeof(send_data[0])); i++){
