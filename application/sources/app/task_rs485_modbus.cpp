@@ -73,8 +73,10 @@ void task_rs485(ak_msg_t* msg) {
 								send_data[i] = 0;
 						}
 						else{
-//							send_data[i] = 1000;
-							send_data[i] = 0xffff&(uint16_t)(accu_data_frame.I_Bat[(i-LTC6803_TOTAL_IC*NUM_OF_ACCU_PER_LTC6803-1)/2]*1000);
+							if (accu_data_frame.I_Bat[(i-LTC6803_TOTAL_IC*NUM_OF_ACCU_PER_LTC6803)/2] >= 0)
+								send_data[i] = 0xffff&(uint16_t)(accu_data_frame.I_Bat[(i-LTC6803_TOTAL_IC*NUM_OF_ACCU_PER_LTC6803-1)/2]*1000);
+							else
+								send_data[i] = 0xffff&(uint16_t)(-accu_data_frame.I_Bat[(i-LTC6803_TOTAL_IC*NUM_OF_ACCU_PER_LTC6803-1)/2]*1000);
 						}
 					}
 					//APP_PRINT("%d\n", (uint32_t)send_data[i]);
