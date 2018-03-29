@@ -1,5 +1,5 @@
 shell.cpp:584:9:int32_t shell_dbg(uint8_t*)	0	static
-shell.cpp:833:9:int32_t shell_accu(uint8_t*)	40	static
+shell.cpp:845:9:int32_t shell_accu(uint8_t*)	48	static
 shell.cpp:796:9:int32_t shell_fwu(uint8_t*)	96	static
 shell.cpp:232:9:int32_t shell_reboot(uint8_t*)	8	static
 shell.cpp:395:9:int32_t shell_stt(uint8_t*)	8	static
@@ -15,4 +15,5 @@ shell.cpp:461:9:int32_t shell_flash(uint8_t*)	32	static
 shell.cpp:589:9:int32_t shell_ram(uint8_t*)	24	static
 shell.cpp:813:9:int32_t shell_svc(uint8_t*)	8	static
 shell.cpp:827:9:int32_t shell_psv(uint8_t*)	0	static
+shell.cpp:833:10:uint32_t myPow(uint8_t, uint8_t)	0	static
 shell.cpp:534:9:int32_t shell_lcd(uint8_t*)	8	static

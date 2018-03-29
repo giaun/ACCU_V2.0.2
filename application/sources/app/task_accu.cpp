@@ -31,12 +31,13 @@
 bool debug_accu_on = false;
 uint8_t ltc6803_stt;
 
-/**TC sensors**/
+/**CT sensors**/
 uint16_t ADC_ConvertedValue[2];
 
 uint8_t currentChannel; /*switch ADC channel*/
 struct accu_data_t accu_data_frame;
 float ctZeroCalibration[NUM_OF_CT_SENSORS];
+float ctAmplifyCalibration[NUM_OF_CT_SENSORS];
 
 /**LTC6803-4**/
 uint16_t cells[LTC6803_TOTAL_IC][12];			//cell voltages
@@ -157,10 +158,21 @@ void task_accu(ak_msg_t* msg) {
 		mem_set(tmp_volt_bat,0,4*(LAGRANGE_LEVEL+1)*sizeof(float));
 
 		mem_set(ctZeroCalibration,0,NUM_OF_CT_SENSORS*sizeof(float));
-		eeprom_read(EEPROM_CALIB_ADDR, (uint8_t*)ctZeroCalibration,NUM_OF_CT_SENSORS*sizeof(float));
+		for (uint8_t i=0; i<NUM_OF_CT_SENSORS; i++){
+			ctAmplifyCalibration[i] = 2.2;
+		}
+		APP_PRINT("\n");
+		for (uint8_t i=0; i<NUM_OF_CT_SENSORS; i++){
+			APP_PRINT("CT[%d]: %d/1000", i, (int32_t)(ctAmplifyCalibration[i]*1000));
+		}
 
-		for(uint8_t i=0; i<4; i++)
-			APP_PRINT("EPPROM[%d]\n",(int32_t)(ctZeroCalibration[i]*1000));
+		eeprom_read(EEPROM_CALIB_ZERO_ADDR, (uint8_t*)ctZeroCalibration,NUM_OF_CT_SENSORS*sizeof(float));
+		eeprom_read(EEPROM_CALIB_AMPLIFY_ADDR, (uint8_t*)ctAmplifyCalibration,NUM_OF_CT_SENSORS*sizeof(float));
+
+		for(uint8_t i=0; i<4; i++){
+			APP_PRINT("EPPROM_ZERO[%d]\n",(int32_t)(ctZeroCalibration[i]*1000));
+			APP_PRINT("EPPROM_AMPLIFY[%d]\n",(int32_t)(ctAmplifyCalibration[i]*1000));
+		}
 
 		/*finished initialize*/
 		timer_set(AC_TASK_ACCU_ID, AC_ACCU_VOLT_CHECK, AC_ACCU_TASK_TIMER_VOLT_CHECK, TIMER_PERIODIC);
@@ -229,7 +241,7 @@ void sys_irq_timer_1s() {
 		adc_74hc4052_set_pin_mode(i);
 		sys_ctrl_delay_ms(1);
 		accu_data_frame.I_Bat[i] = (float)(((adc_ct_io_read(ADC_Channel_9) - adc_ct_io_read(ADC_Channel_8))*3300)/
-					(ADC_COUNTS_CT_SENSOR * ADC_CT_RATIO_mV_PER_A * ADC_CT_AMPLIFY));
+					(ADC_COUNTS_CT_SENSOR * ADC_CT_RATIO_mV_PER_A * ctAmplifyCalibration[i]));
 		APP_DBG("I[%d]: %d.%d%d\t",i,(uint32_t)accu_data_frame.I_Bat[i],(uint32_t)(accu_data_frame.I_Bat[i]*10)%10,(uint32_t)(accu_data_frame.I_Bat[i]*100)%10);
 //	}
 		if(i++ == 3)
@@ -264,7 +276,7 @@ void sys_irq_dma1cn1_ctsensor(){
 //		APP_DBG("sampleI = %d - %d\n", ADC_ConvertedValue[0], ADC_ConvertedValue[1]);
 		/*Calculation I_Bat*/
 		accu_data_frame.I_Bat[ct_sensor] = ((sumI / Number_of_Samples) * vdd) /
-				(ADC_COUNTS_CT_SENSOR * ADC_CT_RATIO_mV_PER_A * ADC_CT_AMPLIFY) - ctZeroCalibration[ct_sensor];
+				(ADC_COUNTS_CT_SENSOR * ADC_CT_RATIO_mV_PER_A * ctAmplifyCalibration[ct_sensor]) - ctZeroCalibration[ct_sensor];
 
 		/*Switch ADC channel*/
 		ct_sensor++;

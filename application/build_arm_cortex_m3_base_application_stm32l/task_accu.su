@@ -1,6 +1,6 @@
-task_accu.cpp:56:6:void print_rx_data(uint8_t, uint8_t)	32	static
-task_accu.cpp:56:6:void print_rx_data(uint8_t, uint8_t)	0	static
-task_accu.cpp:95:6:void save_cells_voltage()	56	static
-task_accu.cpp:132:6:void task_accu(ak_msg_t*)	376	static
-task_accu.cpp:221:6:void sys_irq_timer_1s()	16	static
-task_accu.cpp:248:6:void sys_irq_dma1cn1_ctsensor()	32	static
+task_accu.cpp:57:6:void print_rx_data(uint8_t, uint8_t)	32	static
+task_accu.cpp:57:6:void print_rx_data(uint8_t, uint8_t)	0	static
+task_accu.cpp:96:6:void save_cells_voltage()	56	static
+task_accu.cpp:133:6:void task_accu(ak_msg_t*)	384	static
+task_accu.cpp:233:6:void sys_irq_timer_1s()	24	static
+task_accu.cpp:260:6:void sys_irq_dma1cn1_ctsensor()	32	static

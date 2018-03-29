@@ -830,20 +830,88 @@ int32_t shell_psv(uint8_t* argv) {
 	return 0;
 }
 
+uint32_t myPow(uint8_t x, uint8_t y){
+	uint32_t tmp = 1;
+	if (y == 0)
+	{
+		return 1;
+	}
+	for (uint8_t i = 1; i <= y; i++){
+		tmp = tmp*x;
+	}
+	return tmp;
+}
+
 int32_t shell_accu(uint8_t* argv){
 	switch (*(argv + 5)) {
 	/*check ct sensor (a -> amper)*/
 	case 'a': {
 
 		if (*(argv + 6) == 'c'){
+
+			bool changed = 0;
+
+			if ((*(argv + 7) == ' ') && (*(argv + 9) == ' ')){
+				uint8_t i = 10;
+				uint8_t amperNum = 0;
+				uint32_t amper = 0;
+				uint8_t accu_number = 0;
+				float gain = 1;
+
+
+				accu_number = *(argv + 8)-48;
+
+				while((*(argv + i) != '\r') && (*(argv + i) != '\n'))
+				{
+					if(((*(argv + i)) < '0') || ((*(argv + i)) > '9')){
+						LOGIN_PRINT("ERROR CMD!, i: %d\n",i);
+						return -1;
+					}
+					else{
+						i++;
+					}
+				}
+				amperNum = i-- - 10;
+				for (uint8_t k = 0; k < amperNum ; k++){
+
+					amper += ((*(argv + i)-48) * myPow(10,k));
+					i--;
+				}
+
+				if(amper > 0){
+					if(accu_number >= NUM_OF_CT_SENSORS){
+						for (uint8_t acnum = 0; acnum < NUM_OF_CT_SENSORS; acnum++){
+							gain = (abs(accu_data_frame.I_Bat[acnum] * 1000) / amper);
+							ctAmplifyCalibration[acnum] = (ctAmplifyCalibration[acnum] * gain);
+							ctZeroCalibration[acnum] =(ctZeroCalibration[acnum] / gain);
+							LOGIN_PRINT("new amper calibration for accu %d: %d/1000\n",acnum, (uint32_t)(ctAmplifyCalibration[acnum]*1000));
+						}
+						changed = 1;
+					}
+					else{
+						//LOGIN_PRINT("amper to Calibration: %d, accu: %d\n", amper, accu_number);
+						gain = (abs(accu_data_frame.I_Bat[accu_number] * 1000) / amper);
+						ctAmplifyCalibration[accu_number] = (ctAmplifyCalibration[accu_number] * gain);
+						ctZeroCalibration[accu_number] =(ctZeroCalibration[accu_number] / gain);
+						LOGIN_PRINT("new amper calibration for accu %d: %d/1000\n",accu_number, (uint32_t)(ctAmplifyCalibration[accu_number]*1000));
+					}
+					changed = 1;
+				}
+
+				if (changed)
+					eeprom_write(EEPROM_CALIB_AMPLIFY_ADDR, (uint8_t*)ctAmplifyCalibration, NUM_OF_CT_SENSORS*sizeof(float));
+			}
+
 			/* enter calib CT to zero */
 			LOGIN_PRINT("CT SENSORS CALIBRATING...\n");
 			for(int i=0; i< NUM_OF_CT_SENSORS; i++){
 				if ((ctZeroCalibration[i] == 0)&&(accu_data_frame.I_Bat[i] > -30.0)&&(accu_data_frame.I_Bat[i] < 30.0)) {
 					(ctZeroCalibration[i] = accu_data_frame.I_Bat[i]);
+					changed = 1;
 				}
 			}
-			eeprom_write(EEPROM_CALIB_ADDR, (uint8_t*)ctZeroCalibration, NUM_OF_CT_SENSORS*sizeof(float));
+			if (changed)
+				eeprom_write(EEPROM_CALIB_ZERO_ADDR, (uint8_t*)ctZeroCalibration, NUM_OF_CT_SENSORS*sizeof(float));
 			LOGIN_PRINT("CALIBRATION DONE!\n");
 		}
 		else{
@@ -948,6 +1016,9 @@ int32_t shell_accu(uint8_t* argv){
 //		rs485_stt = -2;
 		ltc6803_stt = 0;
 		mem_set(ctZeroCalibration,0,NUM_OF_CT_SENSORS*sizeof(float));
+		for (uint8_t i=0; i<NUM_OF_CT_SENSORS; i++){
+			ctAmplifyCalibration[i] = 2.2;
+		}
 		LOGIN_PRINT("DONE!\n");
 	}
 		break;

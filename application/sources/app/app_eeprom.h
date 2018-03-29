@@ -69,6 +69,7 @@ typedef struct {
 	app_ir_cmd_info_t air_cond_ir_cmd[4];
 } app_airconds_ir_cmd_info_t;
 
-#define EEPROM_CALIB_ADDR		0x0000
+#define EEPROM_CALIB_ZERO_ADDR		0x0000
+#define EEPROM_CALIB_AMPLIFY_ADDR	0x0010
 
 #endif //__APP_EEPROM_H__

@@ -29,7 +29,7 @@ enum{
 #define ADC_BITS_CT_SENSOR				(12)
 #define ADC_COUNTS_CT_SENSOR			(1<<ADC_BITS_CT_SENSOR)
 #define ADC_CT_RATIO_mV_PER_A			((float)12.5)
-#define ADC_CT_AMPLIFY				((float)2.1)
+//#define ADC_CT_AMPLIFY				((float)2.1)
 
 //detect accu operation
 #define COLLECT_DATA_DURATION			(2*60000)		//(x * 60 * 1000ms) min
@@ -51,6 +51,7 @@ struct accu_data_t {
 extern bool debug_accu_on;
 extern uint8_t ltc6803_stt;
 extern float ctZeroCalibration[NUM_OF_CT_SENSORS];
+extern float ctAmplifyCalibration[NUM_OF_CT_SENSORS];
 //extern int8_t rs485_stt;
 /* DMA read ADC */
 extern uint16_t ADC_ConvertedValue[2];
