@@ -14,6 +14,7 @@
 /* driver include */
 #include "led.h"
 #include "button.h"
+#include "eeprom.h"
 #include "flash.h"
 #include "hs1101.h"
 #include "LTC68032.h"
@@ -54,6 +55,7 @@
 const char* app_version = APP_VER;
 
 static boot_app_share_data_t boot_app_share_data;
+static fatal_log_t fatal_log;
 
 //static void app_power_on_reset();
 static void app_start_timer();
@@ -131,6 +133,10 @@ int main_app() {
 	app_init_state_machine();
 	app_start_timer();
 //	timer_1s_enable();
+
+	eeprom_read(EEPROM_FATAL_LOG_ADDR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
+	fatal_log.restart_times ++;
+	eeprom_write(EEPROM_FATAL_LOG_ADDR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
 
 	/******************************************************************************
 	* app task initial

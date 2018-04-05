@@ -29,8 +29,9 @@ build_arm_cortex_m3_base_application_stm32l/sys_dbg.o: \
  sources/ak/port.h sources/app/app.h sources/ak/ak.h \
  sources/networks/rf_protocols/rf24/nwk/nrf_nwk_sig.h \
  sources/app/app_if.h sources/app/app_eeprom.h sources/app/app_data.h \
- sources/platform/stm32l/system.h sources/driver/flash/flash.h \
- sources/app/app_eeprom.h sources/app/app_flash.h sources/common/utils.h \
+ sources/platform/stm32l/system.h sources/driver/eeprom/eeprom.h \
+ sources/driver/flash/flash.h sources/app/app_eeprom.h \
+ sources/app/app_flash.h sources/common/utils.h \
  /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/string.h \
  /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/sys/string.h \
  sources/sys/sys_irq.h sources/platform/stm32l/io_cfg.h \

@@ -30,8 +30,8 @@ build_arm_cortex_m3_base_application_stm32l/app.o: sources/app/app.cpp \
  sources/ak/port.h sources/platform/stm32l/platform.h sources/ak/task.h \
  sources/common/log_queue.h sources/ak/message.h sources/ak/timer.h \
  sources/ak/timer.h sources/ak/fsm.h sources/driver/led/led.h \
- sources/driver/button/button.h sources/driver/flash/flash.h \
- sources/driver/hs1101/hs1101.h \
+ sources/driver/button/button.h sources/driver/eeprom/eeprom.h \
+ sources/driver/flash/flash.h sources/driver/hs1101/hs1101.h \
  /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/math.h \
  /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/cmath \
  /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/bits/cpp_type_traits.h \

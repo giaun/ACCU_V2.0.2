@@ -9,6 +9,7 @@
 
 #include "ak.h"
 
+#include "eeprom.h"
 #include "flash.h"
 
 #include "app_eeprom.h"
@@ -40,8 +41,8 @@ void sys_dbg_fatal(const int8_t* s, uint8_t c) {
 	extern uint32_t _estack;
 
 	uint32_t len_of_ram = (uint32_t)&_estack - (uint32_t)&_start_ram;
-	uint32_t ram_dump_num_64k_needed = (len_of_ram / FLASH_BLOCK_64K_SIZE) + 1;
-	uint32_t index;
+//	uint32_t ram_dump_num_64k_needed = (len_of_ram / FLASH_BLOCK_64K_SIZE) + 1;
+//	uint32_t index;
 
 	unsigned char rev_c = 0;
 	task_t*		ptemp_current_task;
@@ -57,7 +58,8 @@ void sys_dbg_fatal(const int8_t* s, uint8_t c) {
 #endif
 
 	/* read fatal data from epprom */
-	flash_read(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
+//	flash_read(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
+	eeprom_read(EEPROM_FATAL_LOG_ADDR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
 
 	/* increase fatal time */
 	fatal_log.fatal_times ++;
@@ -104,8 +106,10 @@ void sys_dbg_fatal(const int8_t* s, uint8_t c) {
 	 *  trace fatal info    *
 	 ************************/
 	SYS_PRINT("start write fatal info\n");
-	flash_erase_sector(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR);
-	flash_write(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
+//	flash_erase_sector(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR);
+//	flash_write(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
+	eeprom_erase(EEPROM_FATAL_LOG_ADDR,256);
+	eeprom_write(EEPROM_FATAL_LOG_ADDR, (uint8_t*)&fatal_log, sizeof(fatal_log_t));
 
 	/************************
 	 *  trace fatal message *
@@ -124,19 +128,19 @@ void sys_dbg_fatal(const int8_t* s, uint8_t c) {
 	/************************
 	 *  dump RAM to flash   *
 	 ************************/
-	SYS_PRINT("start dump RAM to FLASH\n");
-	for (index = 0; index < ram_dump_num_64k_needed; index++) {
-		flash_erase_block_64k(APP_FLASH_DUMP_RAM_START_ADDR + (FLASH_BLOCK_64K_SIZE * index));
-		sys_ctrl_delay_us(100);
-	}
+//	SYS_PRINT("start dump RAM to FLASH\n");
+//	for (index = 0; index < ram_dump_num_64k_needed; index++) {
+//		flash_erase_block_64k(APP_FLASH_DUMP_RAM_START_ADDR + (FLASH_BLOCK_64K_SIZE * index));
+//		sys_ctrl_delay_us(100);
+//	}
 
-	index = 0;
-	while (index < len_of_ram) {
-		flash_write(APP_FLASH_DUMP_RAM_START_ADDR + index, (uint8_t*)((uint32_t)&_start_ram + index), DUMP_RAM_UNIT_SIZE);
-		index += DUMP_RAM_UNIT_SIZE;
-	}
+//	index = 0;
+//	while (index < len_of_ram) {
+//		flash_write(APP_FLASH_DUMP_RAM_START_ADDR + index, (uint8_t*)((uint32_t)&_start_ram + index), DUMP_RAM_UNIT_SIZE);
+//		index += DUMP_RAM_UNIT_SIZE;
+//	}
 
-	sys_ctrl_delay_us(1000);
+//	sys_ctrl_delay_us(1000);
 
 #if defined(RELEASE)
 #if 1
@@ -162,7 +166,7 @@ void sys_dbg_fatal(const int8_t* s, uint8_t c) {
 
 				/* dump RAM */
 			case 'R': {
-				index = 0;
+//				index = 0;
 				SYS_PRINT("\n[dump RAM]\n");
 				for (uint32_t i = 0; i < len_of_ram; i++) {
 					if (!(i % 8)) {

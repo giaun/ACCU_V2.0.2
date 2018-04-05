@@ -44,7 +44,7 @@ CONSOLE_BAUDRATE_DEF = -DSYS_CONSOLE_BAUDRATE=$(SYS_CONSOLE_BAUDRATE)
 OPTIMIZE_OPTION = -g -O2
 
 # Release build option, that is used in fatal function, restart system when fatal, and debug levels.
-RELEASE_OPTION = -URELEASE
+RELEASE_OPTION = -DRELEASE
 
 # Enable PIN (using led life) interrupt analyzer function [entry IRQ -> led life ON] and [exit IRQ -> led life OFF].
 IRQ_DEBUG_OPTION = -UAK_IO_IRQ_ANALYZER

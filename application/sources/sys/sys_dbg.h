@@ -54,7 +54,7 @@ typedef struct {
 
 #define FATAL(s, c) \
 do { \
-	DISABLE_INTERRUPTS(); \
+	DISABLE_INTERRUPTS();\
 	sys_dbg_fatal((const int8_t*)s, (uint8_t)c); \
 } while (0);
 

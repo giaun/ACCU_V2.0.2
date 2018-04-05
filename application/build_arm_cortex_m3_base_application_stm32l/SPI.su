@@ -1,16 +1,16 @@
-SPI.cpp:5:1:SPIClass::SPIClass()	0	static
-SPI.cpp:11:1:SPIClass::SPIClass(uint8_t)	0	static
-SPI.cpp:18:6:void SPIClass::io_config()	24	static
-SPI.cpp:52:6:void SPIClass::begin()	16	static
-SPI.cpp:143:6:void SPIClass::end()	0	static
-SPI.cpp:148:6:void SPIClass::beginTransaction(SPISettings)	16	static
-SPI.cpp:220:6:void SPIClass::endTransaction()	0	static
-SPI.cpp:224:6:void SPIClass::setBitOrder(uint8_t, uint8_t)	0	static
-SPI.cpp:229:6:void SPIClass::setBitOrder(uint8_t)	0	static
-SPI.cpp:240:6:void SPIClass::setDataMode(uint8_t)	0	static
-SPI.cpp:280:6:void SPIClass::setClockDivider(uint8_t)	0	static
-SPI.cpp:285:9:uint8_t SPIClass::transfer(uint8_t)	16	static
-SPI.cpp:309:10:uint16_t SPIClass::transfer16(uint16_t)	16	static
-SPI.cpp:322:6:void SPIClass::transfer(void*, uint32_t)	16	static
-SPI.cpp:328:6:void SPIClass::setModule(uint8_t)	0	static
-SPI.cpp:333:13:cpp)	0	static
+SPI.cpp:7:1:SPIClass::SPIClass()	0	static
+SPI.cpp:13:1:SPIClass::SPIClass(uint8_t)	0	static
+SPI.cpp:20:6:void SPIClass::io_config()	24	static
+SPI.cpp:54:6:void SPIClass::begin()	16	static
+SPI.cpp:145:6:void SPIClass::end()	0	static
+SPI.cpp:150:6:void SPIClass::beginTransaction(SPISettings)	16	static
+SPI.cpp:222:6:void SPIClass::endTransaction()	0	static
+SPI.cpp:226:6:void SPIClass::setBitOrder(uint8_t, uint8_t)	0	static
+SPI.cpp:231:6:void SPIClass::setBitOrder(uint8_t)	0	static
+SPI.cpp:242:6:void SPIClass::setDataMode(uint8_t)	0	static
+SPI.cpp:282:6:void SPIClass::setClockDivider(uint8_t)	0	static
+SPI.cpp:287:9:uint8_t SPIClass::transfer(uint8_t)	24	static
+SPI.cpp:322:10:uint16_t SPIClass::transfer16(uint16_t)	16	static
+SPI.cpp:335:6:void SPIClass::transfer(void*, uint32_t)	16	static
+SPI.cpp:341:6:void SPIClass::setModule(uint8_t)	0	static
+SPI.cpp:346:13:cpp)	0	static

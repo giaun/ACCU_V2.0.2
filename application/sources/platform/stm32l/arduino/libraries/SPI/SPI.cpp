@@ -1,6 +1,8 @@
 #include "SPI.h"
 #include "stm32l1xx_gpio.h"
 #include "stm32l1xx_rcc.h"
+#include "sys_dbg.h"
+#include "app_dbg.h"
 
 SPIClass::SPIClass(void) {
 	spi_clock = 1000000;
@@ -284,6 +286,7 @@ void SPIClass::setClockDivider(uint8_t divider){
 
 uint8_t SPIClass::transfer(uint8_t data) {
 	unsigned long rxtxData = data;
+	uint32_t sendTimeout = 3000;
 
 	if (spi_bitorder == LSBFIRST) {
 		asm("rbit %0, %1" : "=r" (rxtxData) : "r" (rxtxData));	// reverse order of 32 bits
@@ -291,11 +294,21 @@ uint8_t SPIClass::transfer(uint8_t data) {
 	}
 
 	/* waiting send idle then send data */
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	while ((SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET) && (--sendTimeout > 0));
+	if (sendTimeout == 0){
+		APP_PRINT("FATAL SPI 1\n");
+		FATAL("SPIT",0x01);
+	}
 	SPI_I2S_SendData(SPI1, (uint8_t)rxtxData);
 
+	sendTimeout = 3000;
+
 	/* waiting conplete rev data */
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+	while ((SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET) && (--sendTimeout > 0));
+	if (sendTimeout == 0){
+		APP_PRINT("FATAL SPI 2\n");
+		FATAL("SPIT",0x02);
+	}
 	rxtxData = (uint8_t)SPI_I2S_ReceiveData(SPI1);
 
 	if (spi_bitorder == LSBFIRST) {

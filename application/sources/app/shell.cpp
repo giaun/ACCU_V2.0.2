@@ -257,13 +257,16 @@ int32_t shell_fatal(uint8_t* argv) {
 
 	case 'r':
 		memset((uint8_t*)&login_fatal_log, 0, sizeof(fatal_log_t));
-		flash_erase_sector(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR);
-		flash_write(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&login_fatal_log, sizeof(fatal_log_t));
+//		flash_erase_sector(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR);
+//		flash_write(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&login_fatal_log, sizeof(fatal_log_t));
+		eeprom_erase(EEPROM_FATAL_LOG_ADDR,256);
+		eeprom_write(EEPROM_FATAL_LOG_ADDR, (uint8_t*)&login_fatal_log, sizeof(fatal_log_t));
 		LOGIN_PRINT("reset fatal log OK\n");
 		break;
 
 	case 'l': {
-		flash_read(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&login_fatal_log, sizeof(fatal_log_t));
+//		flash_read(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, (uint8_t*)&login_fatal_log, sizeof(fatal_log_t));
+		eeprom_read(EEPROM_FATAL_LOG_ADDR, (uint8_t*)&login_fatal_log, sizeof(fatal_log_t));
 
 		LOGIN_PRINT("[times] fatal: %d\n",		login_fatal_log.fatal_times);
 		LOGIN_PRINT("[times] restart: %d\n",	login_fatal_log.restart_times);

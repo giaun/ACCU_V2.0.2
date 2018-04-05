@@ -34,4 +34,30 @@ build_arm_cortex_m3_base_application_stm32l/SPI.o: \
  sources/platform/stm32l/Libraries/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_tim.h \
  sources/platform/stm32l/Libraries/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_usart.h \
  sources/platform/stm32l/Libraries/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_wwdg.h \
- sources/platform/stm32l/Libraries/STM32L1xx_StdPeriph_Driver/inc/misc.h
+ sources/platform/stm32l/Libraries/STM32L1xx_StdPeriph_Driver/inc/misc.h \
+ sources/sys/sys_dbg.h sources/ak/task.h sources/ak/ak.h sources/ak/fsm.h \
+ sources/ak/message.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/stdlib.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/cstdlib \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-m/bits/c++config.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-m/bits/os_defines.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-m/bits/cpu_defines.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/stdlib.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/machine/ieeefp.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/_ansi.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/newlib.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/sys/config.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include/stddef.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/sys/reent.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/_ansi.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/sys/_types.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/machine/_types.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/sys/lock.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/sys/cdefs.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/machine/stdlib.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/c++/7.2.1/bits/std_abs.h \
+ sources/ak/port.h sources/platform/stm32l/platform.h sources/ak/task.h \
+ sources/common/log_queue.h sources/ak/message.h sources/sys/sys_svc.h \
+ sources/common/xprintf.h \
+ /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include/stdarg.h \
+ sources/app/app_dbg.h

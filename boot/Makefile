@@ -9,8 +9,8 @@ Print = @echo "~"
 NAME_MODULE = arm_cortex_m3_base_boot
 PROJECT = $(NAME_MODULE)
 
-GCC_PATH	= /home/conghiep/Desktop/giau/tool/gcc-arm-none-eabi-7-2017-q4-major
-OPENOCD_PATH	= /home/conghiep/IOT_TEAM/IOT_TEAM/IOT_SOFTWARE/openocd-0.10.0-rc1
+GCC_PATH	= /home/giaun/tool_linux/gcc-arm-none-eabi-7-2017-q4-major
+OPENOCD_PATH	= /home/giaun/tool_linux/openocd-0.10.0-rc1
 
 #Include sources file
 include sources/app/Makefile.mk
